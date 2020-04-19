@@ -1,28 +1,32 @@
 # AmazonAlexaDotnet
 
-This is a complete demo using Alexa.NET
+This is a complete demo using  Alexa.NET
 
 Within alexa developer center a skill with name Gorilla was created icnluding the following Intents:
 
-Gorilla Location
+## Gorilla Location
+
 This Intent is called when the user try to know the gorilla's location. The request is resolved within the option:
 
-case "gorillalocation":
+`case "gorillalocation":`
 
-Gorilla Music
+## Gorilla Music
+
 This Intent reproduces a gorilla song located in a external repository
 
-case "gorillamusic":
+`case "gorillamusic":`
 
-Gorilla Invitation
+## Gorilla Invitation
+
 This Intent responses an invitation to a meetup
 
-case "gorillainvitation":
+`case "gorillainvitation":`
 
-Gorilla Calculation
+## Gorilla Calculation
+
 This Intent calculates you age processing the date when you were born
 
-case "gorillacalculation":
+`case "gorillacalculation":`
 
 ####NOTES:
 
