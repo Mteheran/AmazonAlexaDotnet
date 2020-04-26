@@ -110,6 +110,14 @@ namespace AlexaFunction2
                 // do some audio response stuff
                 var audioRequest = skillRequest.Request as AudioPlayerRequest;
 
+                if (audioRequest.AudioRequestType == AudioRequestType.PlaybackStopped)
+                {
+                    response = ResponseBuilder.AudioPlayerStop();
+                }
+                else
+                {
+                    response = ResponseBuilder.Empty();
+                }
                 //
                 //if (audioRequest.AudioRequestType == AudioRequestType.PlaybackStopped)
 
