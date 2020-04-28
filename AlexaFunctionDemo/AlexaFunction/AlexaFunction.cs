@@ -44,10 +44,10 @@ namespace AlexaFunction2
                 switch (intentRequest.Intent.Name.ToLower())
                 {
                     case "gorillalocation":
-                        response = ResponseBuilder.Tell("Gorilla Logic is located in Ruta N medellin Colombia oficina 2020");
+                        //response = ResponseBuilder.Tell("Gorilla Logic is located in Ruta N medellin Colombia oficina 2020");
                         var speech = new SsmlOutputSpeech();
-                        //speech.Ssml = "<speak>Gorilla Logic is located in <lang xml:lang=\"es-ES\">Ruta Ene Medellin Colombia oficina 2020</lang></speak>";
-                        //response = ResponseBuilder.Tell(speech);
+                        speech.Ssml = "<speak>Gorilla Logic is located in <lang xml:lang=\"es-ES\">Ruta Ene Medellin Colombia oficina 2020</lang></speak>";
+                        response = ResponseBuilder.Tell(speech);
                         break;
                     case "gorillamusic":
                     case "amazon.resumeintent":
@@ -57,11 +57,16 @@ namespace AlexaFunction2
                         var speechMusic = new SsmlOutputSpeech();
                         //speech.Ssml = $"<speak>{audioToken}<audio src=\"{audioUrl}\"/></speak>";
                         //response = ResponseBuilder.Tell(speechMusic);
-                        response = ResponseBuilder.AudioPlayerPlay(PlayBehavior.ReplaceAll, audioUrl, audioToken, (int)skillRequest.Context.AudioPlayer.OffsetInMilliseconds);
+                        int OffsetInMilliseconds = (int)skillRequest.Context.AudioPlayer.OffsetInMilliseconds;
+                        if (OffsetInMilliseconds > 209960)
+                        {
+                            OffsetInMilliseconds = 0;
+                        }
+                        response = ResponseBuilder.AudioPlayerPlay(PlayBehavior.ReplaceAll, audioUrl, audioToken, OffsetInMilliseconds);
                         break;
                     case "gorillainvitation":
                         var speechInvitation = new SsmlOutputSpeech();
-                        speechInvitation.Ssml = "<speak><voice name=\"Conchita\"><lang xml:lang=\"es-ES\">Estan todos invitados a la charla Online este viernes 24 de abril donde yo alexa seré la protagonista. Organiza, Peru net development</lang></voice></speak>";
+                        speechInvitation.Ssml = "<speak><voice name=\"Enrique\"><lang xml:lang=\"es-ES\">Estan todos invitados a la charla Online este viernes 24 de abril donde yo alexa seré la protagonista. Organiza, Peru net development</lang></voice></speak>";
                         response = ResponseBuilder.Tell(speechInvitation);
                         break;
                     case "gorillacalculation":
