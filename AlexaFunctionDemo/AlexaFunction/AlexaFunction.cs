@@ -33,7 +33,7 @@ namespace AlexaFunction2
 
             if (requestType == typeof(LaunchRequest))
             {
-                response = ResponseBuilder.Tell("Welcome to Gorilla App!");
+                response = ResponseBuilder.Tell("Bienvenido a mi Aplicación!");
                 response.Response.ShouldEndSession = false;
 
             }
@@ -43,13 +43,18 @@ namespace AlexaFunction2
 
                 switch (intentRequest.Intent.Name.ToLower())
                 {
-                    case "gorillalocation":
-                        //response = ResponseBuilder.Tell("Gorilla Logic is located in Ruta N medellin Colombia oficina 2020");
+                    case "location":
+                        //response = ResponseBuilder.Tell("Estas ubicado en new york USA");
                         var speech = new SsmlOutputSpeech();
-                        speech.Ssml = "<speak>Gorilla Logic is located in <lang xml:lang=\"es-ES\">Ruta Ene Medellin Colombia oficina 2020</lang></speak>";
+                        speech.Ssml = "<speak>Estas ubicado en  <lang xml:lang=\"en-US\">new york USA</lang></speak>";
                         response = ResponseBuilder.Tell(speech);
                         break;
-                    case "gorillamusic":
+                    case "hellothere":
+                        var speechInvitation = new SsmlOutputSpeech();
+                        speechInvitation.Ssml = "<speak><voice name=\"Enrique\"><lang xml:lang=\"es-ES\">Hola a todos los asistentes de esta charla. Soy alexa y es un placer conocerlos.</lang></voice></speak>";
+                        response = ResponseBuilder.Tell(speechInvitation);
+                        break;
+                    case "music":
                     case "amazon.resumeintent":
                         string audioUrl = "https://audiodemosmp3.s3.amazonaws.com/Gorillaz_-_19-2000_lyrics.mp3";
 
@@ -64,12 +69,7 @@ namespace AlexaFunction2
                         }
                         response = ResponseBuilder.AudioPlayerPlay(PlayBehavior.ReplaceAll, audioUrl, audioToken, OffsetInMilliseconds);
                         break;
-                    case "gorillainvitation":
-                        var speechInvitation = new SsmlOutputSpeech();
-                        speechInvitation.Ssml = "<speak><voice name=\"Enrique\"><lang xml:lang=\"es-ES\">Estan todos invitados a la charla Online este viernes 24 de abril donde yo alexa seré la protagonista. Organiza, Peru net development</lang></voice></speak>";
-                        response = ResponseBuilder.Tell(speechInvitation);
-                        break;
-                    case "gorillacalculation":
+                    case "calculation":
                         if (intentRequest.Intent.Slots.Count > 0)
                         {
                             if (intentRequest.Intent.Slots["year"] != null &&
@@ -83,18 +83,18 @@ namespace AlexaFunction2
 
                                 int result = (DateTime.Now - dateValue).Days / 365;
 
-                                response = ResponseBuilder.Tell($"you are {result} years old");
+                                response = ResponseBuilder.Tell($"tu tienes {result} años");
                                 response.Response.ShouldEndSession = true;
 
                             }
                             else
                             {
-                                response = ResponseBuilder.Ask("Please tell me, when were you born?", null);
+                                response = ResponseBuilder.Ask("Cuando naciste?", null);
                             }
                         }
                         else
                         {
-                            response = ResponseBuilder.Ask("Please tell me, when were you born?", null);
+                            response = ResponseBuilder.Ask("Cuando naciste?", null);
                         }
                         break;
                     case "amazon.pauseintent":
@@ -123,11 +123,6 @@ namespace AlexaFunction2
                 {
                     response = ResponseBuilder.Empty();
                 }
-                //
-                //if (audioRequest.AudioRequestType == AudioRequestType.PlaybackStopped)
-
-                //
-                //if (audioRequest.AudioRequestType == AudioRequestType.PlaybackNearlyFinished)
             }
             else
             {
